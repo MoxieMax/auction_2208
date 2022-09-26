@@ -47,7 +47,7 @@ RSpec.describe Auction do
       item1.add_bid(attendee2, 20)
       item1.add_bid(attendee1, 22)
       item4.add_bid(attendee3, 50)
-      # binding.pry
+      
       expect(auction.unpopular_items).to eq([item2, item3, item5])
       
       item3.add_bid(attendee2, 15)
@@ -59,7 +59,6 @@ RSpec.describe Auction do
       item1.add_bid(attendee1, 22)
       item4.add_bid(attendee3, 50)
       item3.add_bid(attendee2, 15)
-      # binding.pry
       expect(auction.potential_revenue).to eq(87)
     end    
   end
@@ -81,6 +80,7 @@ RSpec.describe Auction do
     it 'can return a list of bidders' do
       expect(auction.bidders).to eq(["Bob", "Megan", "Mike"])
     end
+    
     it 'can return bidder info' do
       expect(auction.bidder_info).to eq({
         attendee1 => {:budget => 50,

@@ -44,21 +44,21 @@ class Auction
   end
   
   def bidder_info
-    info = {}
-    bidders1 = items.map do |item|
-      item.bids.keys
+    bidders = Hash.new(0)
+    @items.each do |item|
+      item.bids.each do |person|
+        if !bidders[person.first].is_a?(Hash)
+          bidders[person.first] = {}
+          bidders[person.first][:budget] = person.first.budget
+        end
+        if bidders[person.first][:items].nil?
+          bidders[person.first][:items] = [item]
+        else
+          bidders[person.first][:items] << item
+        end
+        require 'pry'; binding.pry
+      end
     end
-    bidders2 = bidders1.flatten.uniq.map do |bidder|
-      bidder
-    end
-      require 'pry'; binding.pry
+    bidders
   end
 end
-
-# bidders1 = items.map do |item|
-#   item.bids.keys  
-# end
-# 
-# bidders2 = bidders1.flatten.uniq.map do |bidder|
-#   bidder
-# end 
